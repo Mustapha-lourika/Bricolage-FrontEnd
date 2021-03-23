@@ -1,0 +1,118 @@
+<div class="container custom-container-form" style="border: 1px black solid;">
+  <div class="alert alert-primary title-form" role="alert">
+
+
+    Inscrivez vous pour offrir vos services  au miliers des clients!
+  </div><form #formuser="ngForm" novalidate (ngSubmit)="submit(formuser.value)">
+
+<hr/>
+<div class="row">
+
+
+<div class="form-group col" >
+  <label> Nom : </label>
+<input type="text" class="form-control" [class.is-invalid]="nom.invalid && nom.touched" #nom="ngModel"  [required]="true" name="nom" [(ngModel)]="bricoleur.nom"/>
+<span class="text-danger"  *ngIf="nom.invalid && nom.touched">ce champ est obligatoire</span>
+
+
+</div>
+<div class="form-group col" >
+  <label> Prénom : </label>
+<input type="text" class="form-control" [class.is-invalid]="prenom.invalid && prenom.touched" #prenom="ngModel"  [required]="true" name="prenom" [(ngModel)]="bricoleur.prenom"/>
+<span class="text-danger"  *ngIf="prenom.invalid && prenom.touched">ce champ est obligatoire</span>
+
+
+</div>
+</div>
+<div class="row">
+
+
+<div class="form-group col" >
+  <label> Métier : </label>
+<input type="text" class="form-control" [class.is-invalid]="metier.invalid && metier.touched" #metier="ngModel"  [required]="true" name="metier" [(ngModel)]="bricoleur.metier"/>
+<span class="text-danger"  *ngIf="metier.invalid && metier.touched">ce champ est obligatoire</span>
+
+
+</div>
+<div class="form-group col" >
+  <label> Age : </label>
+<input type="number" class="form-control" [class.is-invalid]="age.invalid && age.touched" #age="ngModel"  [required]="true" name="age" [(ngModel)]="bricoleur.age"/>
+<span class="text-danger"  *ngIf="age.invalid && age.touched">ce champ est obligatoire</span>
+
+
+</div>
+</div>
+<div class="row">
+
+
+<div class="form-group col" >
+  <label> Telephone </label>
+<input type="tel" #phone="ngModel" class="form-control" required  pattern="\d{10}$" [class.is-invalid]="phone.invalid && phone.touched" name="telephone"  [(ngModel)]="bricoleur.telephone"/>
+<div *ngIf="phone.errors && phone.touched"  class="text-danger" >
+    <small *ngIf="phone.errors.required"> tel est obligatoire </small>
+    <small *ngIf="phone.errors.pattern"> tel compose de 10 numeros </small>
+
+
+</div>
+</div>
+<div class="form-group col" >
+  <label> Email</label>
+<input type="email" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  [(ngModel)]="bricoleur.email"  [class.is-invalid]="email.invalid && email.touched" #email="ngModel" required="true"/>
+<div *ngIf="email.errors && email.touched"  class="text-danger" >
+  <small *ngIf="email.errors.required"> email est obligatoire </small>
+  <small *ngIf="email.errors.pattern"> email invalide </small>
+
+
+</div>
+</div>
+
+</div>
+
+<div class="form-group">
+  <label for="password">mot de passe</label>
+  <input
+    type="password"
+    class="form-control"
+    name="password"
+    [(ngModel)]="bricoleur.password"
+    required
+    minlength="6"
+    #password="ngModel"
+  />
+  <div class="alert-danger" *ngIf="formuser.submitted && password.invalid">
+    <div *ngIf="password.errors.required">le mot de passe est obligatoire</div>
+    <div *ngIf="password.errors.minlength">
+      le nombre de caractere doit etre superieur de 6
+    </div>
+  </div>
+</div>
+
+<div class="mb-3">
+  <label class="label-local">
+   vous possédez un local :
+  </label>
+  <div class="custom-control custom-radio custom-control-inline">
+  <input  class="custom-control-input" id="oui-radio" #isLocal="ngModel"  type="radio" name="isLocal" [value]="true"  [(ngModel)]="bricoleur.isLocal"  />
+  <label  class="custom-control-label"  for="oui-radio" > Oui </label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input  class="custom-control-input"  id="non-radio" #isLocal="ngModel"  type="radio" name="isLocal" [value]="false"  [(ngModel)]="bricoleur.isLocal"  />
+    <label  class="custom-control-label"  for="non-radio"  > Non </label>
+    </div>
+
+</div>
+<div class="form-group"  *ngIf="bricoleur.isLocal==true">
+  <label> Local : </label>
+<input type="text" class="form-control" [class.is-invalid]="local.invalid && local.touched" #local="ngModel"  [required]="bricoleur.isLocal" name="metier" [(ngModel)]="bricoleur.local"/>
+<span class="text-danger"  *ngIf="local.invalid && local.touched">ce champ est obligatoire</span>
+
+
+</div>
+
+
+
+
+
+<button class="btn btn-primary btn-valider-custom" [disabled]="formuser.form.invalid || haserrors"> S'INSCRIRE </button>
+</form>
+</div>
